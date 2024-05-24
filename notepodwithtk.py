@@ -1,7 +1,10 @@
 #Base made with tutorial from https://www.instructables.com/Create-a-Simple-Python-Text-Editor/
 #Written by  PumpkinSmasher
+#Additions by Mikko below
 #Fixed calls for tkinter. (Guides tk inter calls outdated)
-#
+#Completely different saving function.
+#My own UI
+
 
 
 
