@@ -16,14 +16,14 @@ v=sys.version_info
 from tkinter import *
 from tkinter import filedialog
 
-root=Tk("Text Editor")
-#root.geometry("650x250")
+
 
 
 #Functions----------------------------------------------------------------------------------------------------
 def clear_text():
    text.delete("1.0", "end-1c")
    entryname.delete(0,END)
+   entryname.insert(0,find_entryname())
 
 def saveas():
 
@@ -35,8 +35,7 @@ def saveas():
     file1.write(header+"."+t)
     file1.close()
 
-def write_to_textfile():
-    global text
+def find_entryname():
     entrytext = entryname.get()
     newdirarray = []
     filelist = ""
@@ -62,7 +61,39 @@ def write_to_textfile():
         #print("filelist yllä")
         lenghtfileint=int(lenghtfile)
         entrytext=(lenghtfileint+1)
+    return entrytext
 
+def write_to_textfile():
+    global text
+    entrytext = entryname.get()
+    #newdirarray = []
+    #filelist = ""
+    if entrytext == "":
+
+        entrytext=find_entryname()
+        """
+        dir_list = os.listdir()
+        for file in dir_list:
+            #print(file)
+            dirdot=file.find(".")
+            if dirdot != -1:
+                #print(dirdot)
+                nameoffile = file[:dirdot]
+                #print(nameoffile)
+                newdirarray += [nameoffile]
+            else:
+                newdirarray += [file]
+        for file in newdirarray:
+            if file.isnumeric():
+                filelist += file
+                #print(file.isnumeric())
+
+        lenghtfile=len(filelist)
+        #print(lenghtfile)
+        #print("filelist yllä")
+        lenghtfileint=int(lenghtfile)
+        entrytext=(lenghtfileint+1)
+        """
     #print(newdirarray)
     #print(entrytext)
     teksti = text.get("1.0", "end-1c")
@@ -95,9 +126,14 @@ def open_last_open():
 
 #Setups --------------------------
 open_last_open()
+root=Tk("Text Editor")
+#root.geometry("650x250")
 text=Text(root, height=20, width=30, yscrollcommand=set())
 root.title("SP")
+root.attributes("-alpha", 0.95)
+root.configure(bg='lightgray')
 text.grid(row=1, column=0, columnspan = 3)
+text.configure(bg='lightgray')
 text.insert("1.0",vanhateksti)
 root.resizable(False,False)
 
